@@ -1,0 +1,1 @@
+{{$msg['title']}} foi adicionado com sucesso!

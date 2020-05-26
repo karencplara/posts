@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 use App\Posts;
 use App\User;
+use App\Mail\Message;
+
 
 class HomeController extends Controller
 {
@@ -53,10 +56,15 @@ class HomeController extends Controller
         ]);
 
         if (Auth::check()){
-            $usuario_id = Auth::user()->id;
-            $request['user_id'] = $usuario_id;
+            $user_id = Auth::user()->id;
+            $request['user_id'] = $user_id;
 
             Posts::create($request->all());
+
+            $users = User::where('id', $user_id)->first();
+
+            Mail::to($users['email'])->send(new Message($request));
+  
         }
         
         return redirect('/home')->with('mensagem', 'Post cadastrado com sucesso!');;
