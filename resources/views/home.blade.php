@@ -24,10 +24,10 @@
                     @endif
                     <div class="row">
                         @foreach($posts as $post)
-                        
+                         
                             <div class="col-md-4">
                                 <div class="card">  
-                                        <img src="..." class="card-img-top" alt="...">
+                                        <img src="{{url($post->url)}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$post->title}}</h5>
                                             <p class="card-text">{{$post->description}}</p>
